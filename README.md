@@ -25,14 +25,14 @@ This ensures the spread between assets is **stationary and mean-reverting**, a c
 
 The spread is normalized using the Z-score:
 
-\[
+$$
 Z_t = \frac{X_t - \mu}{\sigma}
-\]
+$$
 
 Where:
-- \(X_t\) = current spread
-- \(\mu\) = historical mean of spread
-- \(\sigma\) = historical standard deviation
+- $X_t$ = current spread  
+- $\mu$ = historical mean of spread  
+- $\sigma$ = historical standard deviation
 
 #### Trading Rules:
 - **Z > +2** → Short the spread  
