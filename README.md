@@ -32,41 +32,31 @@ $$
 Where:
 - $X_t$ = current spread  
 - $\mu$ = historical mean of spread  
-- $\sigma$ = historical standard deviation
+- $\sigma$ = historical standard deviation  
 
-#### Trading Rules:
+**Trading Rules:**
 - **Z > +2** → Short the spread  
 - **Z < -2** → Long the spread  
 - **Z ≈ 0** → Close positions  
 
-Thresholds are based on the **95% empirical rule**, capturing statistically extreme deviations.
+Thresholds are based on the **95% empirical rule**.
 
 ---
 
 ## Key Features
-
 - Object-Oriented design via a `PairsTradingBot` class
 - Automated data retrieval using Yahoo Finance
-- API throttling and error handling to prevent request failures
-- Historical backtesting engine with:
-  - Return on Investment (ROI)
-  - Sharpe Ratio
-  - Maximum Drawdown
+- API throttling and error handling
+- Historical backtesting with ROI, Sharpe Ratio, and Max Drawdown
 - Paper trading simulation to mimic live portfolio behavior
-- Detailed logging of:
-  - Trade execution
-  - Portfolio value
-  - Strategy decisions
-- Visualizations for:
-  - Z-score dynamics
-  - Cumulative portfolio performance
+- Detailed logging of trades and portfolio evolution
+- Visualizations for Z-score dynamics and portfolio performance
 
 ---
 
 ## Sample Backtest Results
 
 Example (DAL–KO pair):
-
 - **ROI:** ~24.6%
 - **Sharpe Ratio:** ~1.33
 - **Max Drawdown:** ~7.3%
@@ -97,32 +87,44 @@ pairs-trading-bot/
 │
 └── reports/
     └── final_report.pdf
+Technologies Used
 
+Python
 
+NumPy, pandas
 
+statsmodels
 
----
+matplotlib
 
-## Technologies Used
+Yahoo Finance API
 
-- **Python**
-- NumPy, pandas
-- statsmodels
-- matplotlib
-- Yahoo Finance API
-- Object-Oriented Programming
-- Time-series econometrics
+Object-Oriented Programming
 
----
+Time-series econometrics
 
-## How to Run
+How to Run
 
-1. Clone the repository:
-```bash
+Clone the repository:
 git clone https://github.com/eryajain12/pairs-trading-bot.git
 cd pairs-trading-bot
-2. Install dependencies:
+
+Install dependencies:
 pip install -r requirements.txt
-3. Run the bot:
+
+Run the bot:
 python src/pairs_trading_bot.py
 
+Future Improvements
+
+Multivariate cointegration (Johansen test)
+
+Dynamic hedge ratio estimation
+
+Transaction cost modeling
+
+Risk-adjusted position sizing
+
+Intraday data support
+
+Live broker API integration
