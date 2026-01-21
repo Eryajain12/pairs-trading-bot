@@ -5,23 +5,23 @@ This project implements a **Python-based algorithmic trading bot** that executes
 
 The bot identifies statistically valid trading pairs using **cointegration testing**, generates trading signals based on **Z-score deviations**, and evaluates performance through **historical backtesting and paper trading simulations**.
 
-This project combines **time-series econometrics, object-oriented programming, and trading system design**, making it suitable for quantitative finance, risk analytics, and trading roles.
+The project integrates **time-series econometrics, object-oriented programming, and risk-aware trading system design**, making it suitable for **quantitative finance, risk analytics, and trading roles**.
 
 ---
 
-## Strategy Methodology
+##  Strategy Methodology
 
 ### Cointegration Testing
 - Uses the **Engle–Granger two-step method**
 - Performs linear regression on asset price series
-- Applies the **Augmented Dickey-Fuller (ADF) test** on residuals
-- Trades only pairs with statistically significant cointegration (p-value ≤ 0.05)
+- Applies the **Augmented Dickey–Fuller (ADF) test** on regression residuals
+- Trades only pairs with statistically significant cointegration (**p-value ≤ 0.05**)
 
-This ensures the spread between assets is **stationary and mean-reverting**, a core requirement for pairs trading.
+This ensures the spread between assets is **stationary and mean-reverting**, a necessary condition for pairs trading.
 
 ---
 
-### Z-Score Based Signal Generation
+### Z-Score–Based Signal Generation
 
 The spread is normalized using the Z-score:
 
@@ -30,101 +30,86 @@ Z_t = \frac{X_t - \mu}{\sigma}
 $$
 
 Where:
-- $X_t$ = current spread  
-- $\mu$ = historical mean of spread  
-- $\sigma$ = historical standard deviation  
+- $X_t$ = Current spread  
+- $\mu$ = Historical mean of the spread  
+- $\sigma$ = Historical standard deviation  
 
-**Trading Rules:**
+**Trading Rules**
 - **Z > +2** → Short the spread  
-- **Z < -2** → Long the spread  
+- **Z < −2** → Long the spread  
 - **Z ≈ 0** → Close positions  
 
-Thresholds are based on the **95% empirical rule**.
+Entry thresholds are motivated by the **95% empirical rule**, balancing trade frequency and signal quality.
 
 ---
 
-## Key Features
-- Object-Oriented design via a `PairsTradingBot` class
+##  Key Features
+- Object-oriented design via a `PairsTradingBot` class
 - Automated data retrieval using Yahoo Finance
-- API throttling and error handling
-- Historical backtesting with ROI, Sharpe Ratio, and Max Drawdown
-- Paper trading simulation to mimic live portfolio behavior
+- Robust error handling and API throttling
+- Historical backtesting framework
+- Paper trading simulation to approximate live portfolio behavior
+- Performance evaluation using ROI, Sharpe Ratio, Max Drawdown
 - Detailed logging of trades and portfolio evolution
 - Visualizations for Z-score dynamics and portfolio performance
 
 ---
 
-## Sample Backtest Results
+## Risk-Based Impact Score (RBIS)
 
-Example (DAL–KO pair):
-- **ROI:** ~24.6%
-- **Sharpe Ratio:** ~1.33
-- **Max Drawdown:** ~7.3%
+To complement traditional performance metrics, the strategy introduces a **Risk-Based Impact Score (RBIS)** — a composite measure designed to evaluate **risk-adjusted effectiveness** rather than raw returns alone.
 
-> Results vary based on asset pair, lookback window, and market conditions.
+RBIS integrates **return, volatility, and downside risk** into a single interpretable metric, enabling consistent comparison across asset pairs and strategy configurations.
+
+### RBIS Definition
+
+$$
+\text{RBIS} = \frac{\text{ROI} \times \text{Sharpe Ratio}}{\text{Max Drawdown}}
+$$
+
+Where:
+- **ROI** = Total return over the backtest period  
+- **Sharpe Ratio** = Risk-adjusted return  
+- **Max Drawdown** = Maximum peak-to-trough portfolio loss  
 
 ---
 
-## Project Structure
+### Interpretation
+- **Higher RBIS** → Strong risk-adjusted performance with controlled drawdowns  
+- **Lower RBIS** → Returns dominated by volatility or tail risk  
+- Explicitly penalizes strategies with large drawdowns, even if raw returns appear attractive
 
-```text
-pairs-trading-bot/
-│
-├── README.md
-├── requirements.txt
-│
-├── src/
-│   ├── pairs_trading_bot.py   # Core strategy logic
-│   ├── backtest.py            # Backtesting engine
-│   ├── paper_trading.py       # Paper trading simulation
-│   └── utils.py               # Statistical helper functions
-│
-├── notebooks/
-│   └── exploratory_analysis.ipynb
-│
-├── logs/
-│   └── trading.log
-│
-└── reports/
-    └── final_report.pdf
-Technologies Used
+RBIS is **unit-free** and facilitates comparison across:
+- Different equity pairs  
+- Lookback windows  
+- Entry/exit thresholds  
 
-Python
+---
 
-NumPy, pandas
+##  Sample Backtest Results
 
-statsmodels
+**Example: DAL–KO Pair**
+- **ROI:** ~24.6%  
+- **Sharpe Ratio:** ~1.33  
+- **Max Drawdown:** ~7.3%  
 
-matplotlib
+Resulting in:
+RBIS ≈ 4.47
 
-Yahoo Finance API
 
-Object-Oriented Programming
+This indicates **strong risk-adjusted performance**, with profits achieved without excessive downside risk.
 
-Time-series econometrics
+> Results vary by asset pair, market regime, and parameter selection.
 
-How to Run
+---
 
-Clone the repository:
-git clone https://github.com/eryajain12/pairs-trading-bot.git
-cd pairs-trading-bot
+##  Key Takeaways
+- Cointegration ensures structural mean reversion rather than short-term correlation
+- Z-score thresholds provide disciplined entry and exit rules
+- RBIS enhances evaluation by penalizing drawdowns alongside volatility
+- Paper trading validates strategy robustness beyond theoretical backtests
 
-Install dependencies:
-pip install -r requirements.txt
+---
 
-Run the bot:
-python src/pairs_trading_bot.py
-
-Future Improvements
-
-Multivariate cointegration (Johansen test)
-
-Dynamic hedge ratio estimation
-
-Transaction cost modeling
-
-Risk-adjusted position sizing
-
-Intraday data support
-
-Live broker API integration
+##  Disclaimer
+This project is for **educational and research purposes only** and does not constitute financial or investment advice.
