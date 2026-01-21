@@ -100,6 +100,7 @@ pairs-trading-bot/
 
 
 
+
 ---
 
 ## Technologies Used
@@ -124,18 +125,4 @@ cd pairs-trading-bot
 pip install -r requirements.txt
 3. Run the bot:
 python src/pairs_trading_bot.py
-
-## Future Improvements
-
-Multivariate cointegration (Johansen test)
-
-Dynamic hedge ratio estimation
-
-Transaction cost modeling
-
-Risk-adjusted position sizing
-
-Extension to intraday data
-
-Live broker API integration
 
