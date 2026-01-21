@@ -76,25 +76,28 @@ Example (DAL–KO pair):
 ---
 
 ## Project Structure
+
+```text
 pairs-trading-bot/
 │
 ├── README.md
 ├── requirements.txt
 │
 ├── src/
-│ ├── pairs_trading_bot.py # Core strategy logic
-│ ├── backtest.py # Backtesting engine
-│ ├── paper_trading.py # Paper trading simulation
-│ └── utils.py # Statistical helper functions
+│   ├── pairs_trading_bot.py   # Core strategy logic
+│   ├── backtest.py            # Backtesting engine
+│   ├── paper_trading.py       # Paper trading simulation
+│   └── utils.py               # Statistical helper functions
 │
 ├── notebooks/
-│ └── exploratory_analysis.ipynb
+│   └── exploratory_analysis.ipynb
 │
 ├── logs/
-│ └── trading.log
+│   └── trading.log
 │
 └── reports/
-└── final_report.pdf
+    └── final_report.pdf
+
 
 
 ---
